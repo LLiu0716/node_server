@@ -32,7 +32,7 @@ app.get( '/user/:id', ( req, res, next ) => {
 	res.send( 'USER' )
 } )
 
-// 错误请求
+// 错误处理中间件
 app.use( ( err: any, req: any, res: any, next: any ) => {
 	res.status( 500 ).send( '404' )
 } )
