@@ -17,7 +17,7 @@ app.use( bodyParser.urlencoded( { extended: false } ) )
 
 // 没有挂载路径的中间件,应用的每个请求都会执行该中间件
 app.use( ( req, res, next ) => {
-	console.log( 'Time:', Date.now() )
+	console.log( 'Time:', new Date() )
 	next()
 } )
 
