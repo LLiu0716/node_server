@@ -1,12 +1,8 @@
 import { Router } from 'express'
 
-import {
-  get_login,
-  get_user,
-  get_user_list,
-  get_imgs,
-  get_home
-} from '../method'
+import { post_login } from '../method/login'
+import { get_user, get_user_list } from '../method/user'
+import { get_imgs, get_home } from '../method/home'
 
 const router = Router()
 
@@ -29,8 +25,8 @@ router.use(
   }
 )
 
-router.get( '/login', ( req, res ) => {
-  get_login( req, res )
+router.post( '/login', ( req, res ) => {
+  post_login( req, res )
 } )
 
 router.get( '/user', ( req, res ) => {
@@ -46,7 +42,7 @@ router.get( '/user/list', ( req, res ) => {
 } )
 
 router.get( '/home', ( req, res ) => {
-  get_home( res, res )
+  get_home( req, res )
 } )
 
 export default router
