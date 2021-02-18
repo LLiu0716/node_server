@@ -1,13 +1,15 @@
 const jwt = require( "jsonwebtoken" )
 
 class Jwt {
-  constructor ( data ) {
+  constructor ( data, nick = '' ) {
     this.data = data
+    this.nick = nick
   }
+
   set_token () {
     const data = this.data
     const created = Math.floor( Date.now() )
-    const cert = '我是真的爱上你'
+    const cert = `真的爱你${ this.nick }`
     let token = jwt.sign( {
       data,
       exp: created,
@@ -16,7 +18,7 @@ class Jwt {
   }
   verifyToken () {
     const token = this.data
-    const cert = '我是真的爱上你'
+    const cert = `真的爱你${ this.nick }`
     let res
     try {
       const result = jwt.verify( token, cert ) || {}
@@ -39,11 +41,6 @@ let token = obj.set_token()
 const sty = new Jwt( token )
 let arr = sty.verifyToken()
 
+console.log( '生成 token => ', token )
+console.log( '验证 token => 如果返回 err 就是 token 失效 ', arr )
 
-// let token = jwt.sign( {
-//   data: 'data',
-//   exp: Math.floor( Date.now() / 1000 ) + ( 60 * 60 )
-// }, 'is_token' )
-
-console.log( 'token', token )
-console.log( 'arr', arr )

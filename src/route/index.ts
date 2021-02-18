@@ -20,16 +20,19 @@ router.use(
   ( req, res, next ) => {
     // 验证token
     const authorization = req.headers.authorization
-    if ( authorization ) {
-      return res.status( 401 ).send( {
-        code: 401,
-        msg: "当前还未登录，请先登录"
-      } )
+    console.log( 'authorization', authorization )
+    if ( !authorization ) {
+      return res.status( 401 ).send(
+        { code: 401, msg: "当前还未登录，请先登录" }
+      )
     }
     const jwt = new Jwt( authorization )
     const result = jwt.verifyToken()
+    console.log( '路由', result )
     if ( result == "err" ) {
-      return res.status( 401 ).send( { code: 401, msg: "登录过期" } )
+      return res.status( 401 ).send(
+        { code: 401, msg: "登录过期" }
+      )
     }
     next()
   }

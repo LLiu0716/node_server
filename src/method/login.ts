@@ -32,6 +32,8 @@ export const post_login = ( req: any, res: any ) => {
           } else {
             const jwt = new Jwt( username )
             const token = jwt.set_token()
+            const rrr = new Jwt( token )
+            console.log( rrr.verifyToken() )
             res.json( res_yes( { token }, '登录成功' ) )
           }
         } else {
