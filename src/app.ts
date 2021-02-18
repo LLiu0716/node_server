@@ -1,10 +1,12 @@
 import express from 'express'
 import * as bodyParser from 'body-parser'
 import router from './route'
+import { res_nos } from './method'
 
 export const url = __dirname
 
 const app = express()
+
 
 app.listen( 8080, () => {
 	console.log( 'http://127.0.0.1:8080' )
@@ -24,15 +26,15 @@ app.use( ( req, res, next ) => {
 	next()
 } )
 
-// 挂载至 /user/:id的中间件,任何指向/user/:id的请求都会执行它
+// 挂载至 /user的中间件,任何指向/user的请求都会执行它
 app.use( '/user', ( req, res, next ) => {
-	console.log( 'Request Type', req.method )
 	next()
 } )
 
 // 错误处理中间件
 app.use( ( err: any, req: any, res: any, next: any ) => {
-	res.status( 500 ).send( '404' )
+	console.log( '777' )
+	res.status( 500 ).json( res_nos( '404' ) )
 } )
 
 app.use( router )

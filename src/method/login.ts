@@ -4,6 +4,7 @@
 import * as fs from 'fs'
 import { url } from '../app'
 import { res_nos, res_yes } from './index'
+import Jwt from '../token'
 
 /** 登录函数 */
 export const post_login = ( req: any, res: any ) => {
@@ -29,7 +30,9 @@ export const post_login = ( req: any, res: any ) => {
           if ( !urne && !pswd ) {
             res.json( res_nos( '账号或密码错误' ) )
           } else {
-            res.json( res_yes( {}, '登录成功' ) )
+            const jwt = new Jwt( username )
+            const token = jwt.set_token()
+            res.json( res_yes( { token }, '登录成功' ) )
           }
         } else {
           res.json( res_nos( '没有输入账号密码' ) )
