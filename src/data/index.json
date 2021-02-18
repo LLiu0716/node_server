@@ -1,74 +1,38 @@
 {
-	"data": [
+	"user": [
 		{
-			"id": 4,
-			"dome": true,
-			"name": "跳舞"
-		},
-		{
-			"id": 3,
-			"dome": false,
-			"name": "睡觉"
-		},
-		{
-			"id": 5,
-			"dome": true,
-			"name": "唱歌"
-		},
-		{
-			"name": "听歌",
-			"id": 1,
-			"dome": false
-		},
-		{
-			"id": 2,
-			"dome": true,
-			"name": "看电影"
-		},
-		{
-			"id": 1613064858064,
-			"name": "情歌",
-			"dome": false
-		},
-		{
-			"id": 1613064933946,
-			"dome": true,
-			"name": "你一定要幸福"
-		},
-		{
-			"id": 1613064948629,
-			"name": "小幸运",
-			"dome": false
-		}
-	],
-	"list": [
-		{
-			"name": "吃饭",
+			"username": "10086",
+			"password": "123",
 			"id": 0,
-			"dome": false
+			"dome": true
 		},
 		{
-			"name": "跳舞",
+			"username": "100861",
+			"password": "123",
 			"id": 4,
 			"dome": true
 		},
 		{
-			"name": "睡觉",
+			"username": "100862",
+			"password": "123",
 			"id": 3,
 			"dome": false
 		},
 		{
-			"name": "唱歌",
+			"username": "100863",
+			"password": "123",
 			"id": 5,
 			"dome": true
 		},
 		{
-			"name": "听歌",
+			"username": "100864",
+			"password": "123",
 			"id": 1,
 			"dome": false
 		},
 		{
-			"name": "看电影",
+			"username": "100865",
+			"password": "123",
 			"id": 2,
 			"dome": false
 		}

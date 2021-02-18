@@ -1,7 +1,6 @@
 import express from 'express'
 import * as bodyParser from 'body-parser'
 import router from './route'
-import * as Mock from 'mockjs'
 
 export const url = __dirname
 
@@ -18,7 +17,6 @@ app.use( bodyParser.urlencoded( { extended: false } ) )
 
 // 没有挂载路径的中间件,应用的每个请求都会执行该中间件
 app.use( ( req, res, next ) => {
-	console.log( 'Time:', Mock.mock( '@now' ) )
 	res.header( "Access-Control-Allow-Origin", "*" );
 	res.header( 'Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS' )
 	res.header( "Access-Control-Allow-Headers", "X-Requested-With" )
