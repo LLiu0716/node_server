@@ -3,10 +3,7 @@ import * as bodyParser from 'body-parser'
 import router from './route'
 import { res_nos } from './method'
 
-export const url = __dirname
-
 const app = express()
-
 
 app.listen( 8080, () => {
 	console.log( 'http://127.0.0.1:8080' )
