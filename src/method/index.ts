@@ -23,3 +23,17 @@ export const res_nos = ( msg: string ) => {
     msg
   }
 }
+
+/**
+ * md5 加密 
+ * @type string
+ * @param stj 传入需要加密的账号或者是密码
+ */
+export function md5s ( stj: string ) {
+  const crypto = require( "crypto" )
+  const md5 = crypto.createHash( 'md5' )
+  md5.update( stj )
+  stj = md5.digest( 'hex' )
+  console.log( 'stj > ', stj )
+  return stj
+}

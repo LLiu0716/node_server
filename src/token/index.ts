@@ -1,11 +1,11 @@
 import * as jwt from 'jsonwebtoken'
 
 export default class Jwt {
-  constructor ( data: any ) {
+  constructor ( data: string ) {
     this.data = data
   }
 
-  data: any
+  data: string
 
   /** 生成 token */
   set_token () {

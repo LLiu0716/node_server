@@ -3,7 +3,7 @@
  */
 import * as fs from 'fs'
 import { url } from '../app'
-import { res_nos, res_yes } from './index'
+import { res_nos, res_yes, md5s } from './index'
 import Jwt from '../token'
 
 /** 登录函数 */
@@ -21,20 +21,25 @@ export const post_login = ( req: any, res: any ) => {
           // 注意 => 不要在循环里写逻辑
           let urne: boolean = false
           let pswd: boolean = false
+          let id: string = ''
           user.forEach( ( v: any ) => {
             if ( v.username == username ) {
               urne = true
-              if ( v.username == username ) pswd = true
+              if ( v.username == username ) {
+                pswd = true
+                id = v.id
+              }
             }
           } )
           if ( !urne && !pswd ) {
             res.json( res_nos( '账号或密码错误' ) )
           } else {
-            const jwt = new Jwt( username )
+            // 这里进行加密处理 , 就算拿到 token 也无法反推账号是啥
+            const name = md5s( username ).substring( 10 )
+            console.log( 'name >', name )
+            const jwt = new Jwt( name )
             const token = jwt.set_token()
-            const rrr = new Jwt( token )
-            console.log( rrr.verifyToken() )
-            res.json( res_yes( { token }, '登录成功' ) )
+            res.json( res_yes( { token, id }, '登录成功' ) )
           }
         } else {
           res.json( res_nos( '没有输入账号密码' ) )
