@@ -8,14 +8,13 @@ import Jwt from '../token'
 
 /** 登录函数 */
 export const post_login = ( req: any, res: any ) => {
-  console.log( 'req', req.query )
   const { username, password } = req.body
-  fs.readFile( path.join( __dirname + "../../../data/index.json" ),
+  fs.readFile( path.join( __dirname, "../../data/index.json" ),
     ( err, data ) => {
       try {
-        const arr = JSON.parse( data.toString() )
-        if ( err ) res.json( err )
+        if ( err ) res.json( res_nos( '还没有注册账号 , 请先注册' ) )
         else {
+          const arr = JSON.parse( data.toString() )
           // 这个 if 可以不写 , 前端如果连这都不做判断就发请求 , 直接干他
           if ( username && password ) {
             const { user } = arr
@@ -50,13 +49,31 @@ export const post_login = ( req: any, res: any ) => {
     } )
 }
 
-/** 登录函数 */
+/** 注册函数 */
 export const post_register = ( req: any, res: any ) => {
   console.log( 'req', req.query )
   const { username, password, nickname = '' } = req.body
-  fs.readFile( path.join( __dirname + "../../../data/index.json" ),
+  fs.readFile( path.join( __dirname, "../../data/index.json" ),
     ( err, data ) => {
-      if ( err ) res.json( err )
+      if ( err ) {
+        // 拿不到文件 , 说明没有 index.json 文件 
+        // 第一次用 , 当然没有 index.json 文件
+        const arr: any = { user: [] }
+        arr.user.push( {
+          id: Date.now().toString(),
+          username,
+          password,
+          nickname,
+          dome: false  // 可以用来设置权限
+        } )
+        const str = JSON.stringify( arr )
+        fs.writeFile( path.join( __dirname, "../../data/index.json" ),
+          str, err => {
+            if ( err ) res.json( err )
+            else res.json( res_yes( {}, '注册成功' ) )
+          }
+        )
+      }
       else {
         try {
           const arr = JSON.parse( data.toString() )

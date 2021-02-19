@@ -1,6 +1,8 @@
 import express from 'express'
 import * as bodyParser from 'body-parser'
-import router from './route'
+import HomeRouter from './route/home'
+import LoginRouter from './route/login'
+import UserRouter from './route/user'
 import { res_nos } from './method'
 
 const app = express()
@@ -22,15 +24,14 @@ app.use( ( req, res, next ) => {
 	next()
 } )
 
-// 挂载至 /user的中间件,任何指向/user的请求都会执行它
-app.use( '/user', ( req, res, next ) => {
-	next()
-} )
-
 // 错误处理中间件
 app.use( ( err: any, req: any, res: any, next: any ) => {
 	console.log( '777' )
 	res.status( 500 ).json( res_nos( '404' ) )
 } )
 
-app.use( router )
+app.use( HomeRouter )
+
+app.use( LoginRouter )
+
+app.use( UserRouter )
