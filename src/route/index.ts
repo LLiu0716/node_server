@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { post_login } from '../method/login'
+import { post_login, post_register } from '../method/login'
 import { get_user, get_user_list } from '../method/user'
 import { get_imgs, get_home } from '../method/home'
 
@@ -40,6 +40,10 @@ router.use(
 
 router.post( '/login', ( req, res ) => {
   post_login( req, res )
+} )
+
+router.post( '/register', ( req, res ) => {
+  post_register( req, res )
 } )
 
 router.get( '/user', ( req, res ) => {

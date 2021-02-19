@@ -49,3 +49,39 @@ export const post_login = ( req: any, res: any ) => {
       } catch ( error ) { res.status( 404 ).json( res_nos( 'error' ) ) }
     } )
 }
+
+/** 登录函数 */
+export const post_register = ( req: any, res: any ) => {
+  console.log( 'req', req.query )
+  const { username, password, nickname = '' } = req.body
+  fs.readFile( path.join( __dirname + "../../../data/index.json" ),
+    ( err, data ) => {
+      if ( err ) res.json( err )
+      else {
+        try {
+          const arr = JSON.parse( data.toString() )
+          let user: any[] = arr.user
+          console.log( 'user', user )
+          const urne: boolean = user.some( ( v: any ) => v.username === username )
+          if ( urne ) res.json( res_nos( '账号已经被注册' ) )
+          else {
+            user.push( {
+              id: Date.now().toString(),
+              username,
+              password,
+              nickname,
+              dome: false  // 可以用来设置权限
+            } )
+            console.log( 'arr', arr )
+            const str = JSON.stringify( arr )
+            console.log( 'str', str )
+            console.log( path.join( __dirname, "../../data/index.json" ) )
+            fs.writeFile( path.join( __dirname, "../../data/index.json" ), str, err => {
+              if ( err ) res.json( err )
+              else res.json( res_yes( {}, '注册成功' ) )
+            } )
+          }
+        } catch ( error ) { res.status( 404 ).json( res_nos( error ) ) }
+      }
+    } )
+}

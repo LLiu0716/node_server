@@ -7,7 +7,6 @@ const app = express()
 
 app.listen( 8080, () => {
 	console.log( 'http://127.0.0.1:8080' )
-	console.log( 'http://127.0.0.1:8080/index' )
 	console.log( 'http://127.0.0.1:8080/home' )
 } )
 
@@ -17,7 +16,7 @@ app.use( bodyParser.urlencoded( { extended: false } ) )
 // 没有挂载路径的中间件,应用的每个请求都会执行该中间件
 app.use( ( req, res, next ) => {
 	res.header( "Access-Control-Allow-Origin", "*" );
-	res.header( 'Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS' )
+	res.header( 'Access-Control-Allow-Methods', 'GET, POST' )
 	res.header( "Access-Control-Allow-Headers", "X-Requested-With" )
 	res.header( 'Access-Control-Allow-Headers', 'Content-Type' )
 	next()
